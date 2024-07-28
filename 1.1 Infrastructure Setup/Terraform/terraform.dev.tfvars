@@ -1,0 +1,9 @@
+aws_region                 = "ap-southeast-1"
+public_subnet_cidr_blocks  = ["10.0.64.0/24"]
+private_subnet_cidr_blocks = ["10.0.65.0/28", "10.0.66.0/28"]
+availability_zones         = ["ap-southeast-1a", "ap-southeast-1b"]
+component_postfix          = "dev"
+db_uname                   = "minhaj"
+db_pass                    = "changeme"
+rds_instance_class         = "db.t3.micro"
+key_name                   = "min-keys"
