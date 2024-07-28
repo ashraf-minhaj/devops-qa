@@ -65,8 +65,9 @@ variable "db_pass" {
 
 # ec2
 variable "ami_id" {
-  type    = string
-  default = "ami-12345678"
+  type        = string
+  default     = "ami-0a481e6d13af82399"
+  description = "amazon linux 2023"
 }
 
 variable "instance_type" {
