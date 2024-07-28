@@ -172,7 +172,7 @@ Deployed another application where it trains a model from a source db to a desti
 > Note: Created two subnets. Because for DB Subnet groups, even with `multi_az=false` we have to add two subnets with multi az, [reference](https://stackoverflow.com/questions/63974936/db-subnet-group-doesnt-meet-availability-zone-coverage-requirement-please-add).
 
 To further automate the proess and to make it easy to pass the variables I added automation scripts written in bash. Just run - `script.sh var_name` such as -
-- `apply.sh dev` to init dev env
+- `init.sh dev` to init dev env
 - `plan.sh dev` plan and
 - `apply.sh dev` apply the infra
 
