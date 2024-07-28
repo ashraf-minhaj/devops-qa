@@ -13,8 +13,8 @@
   - [1.1 Infrastructure Setup](#11infrastructuresetup9)
   - [1.2 Docker and Kubernetes:](#12dockerandkubernetes9)
 - [Real-World Scenarios](#real-world-scenarios)
-  - [Scenario 1](#scenario19)
-  - [Scenario 2](#scenario29)
+  - [Scenario 1: scaling-and-performance](#21-scaling-and-performance)
+  - [Scenario 2: cost-management](#22-cost-management)
 
 # Change Control
 
@@ -44,8 +44,9 @@ DevOps tools/techs I have used -
 | Monitoring | Grafana, Jaeger, OpenTelemetry |
 | Testing Automation | TerraTest, Selenium |
 | Programming Language | Python |
+| Secrets Management | Infisical |
 
-Deployed projects to **DigitalOcean** and **AWS** with complete CI/CD pipeline with **GitLab, GitHub Actions** and **CircleCi**. Wrote **AWS** Infrastructures using **Terraform** and created **AMI** using **Packer**. Built and deployed **Docker**ized application to deploy to both the cloud providers, in AWS, used **EKS**, **Fargate** along with **ECR** for containerized application. In the local environment, setup **kind** and **k3s Kubernetes** clusters to test and play around with K8s. Setup servers with **Ansible**. Wrote codes using **Python**. Tested infrastructure using **Terratest**, automated manual works using **Selenium** and finally monitored metrics, bottlenecks, health, cost consumption etc. using **Grafana, Jaeger** and **OpenTelemetry**.
+Deployed projects to **DigitalOcean** and **AWS** with complete CI/CD pipeline with **GitLab, GitHub Actions** and **CircleCi**. Wrote **AWS** Infrastructures using **Terraform** and created **AMI** using **Packer**. Built and deployed **Docker**ized application to deploy to both the cloud providers, in AWS, used **EKS**, **Fargate** along with **ECR** for containerized application. In the local environment, setup **kind** and **k3s Kubernetes** clusters to test and play around with K8s. Setup servers with **Ansible**. Wrote codes using **Python**. Tested infrastructure using **Terratest**, automated manual works using **Selenium** and finally monitored metrics, bottlenecks, health, cost consumption etc. using **Grafana, Jaeger** and **OpenTelemetry**. I also explored **Infisical** to store and pass Terraform secrets during runtime. 
 
 Currently working on **RedHat OpenShift Virtualization**, deployed Single Node and Multi Node clusters. Working on **Virtual Machine** deployment and migration from vmware. 
 
@@ -103,6 +104,8 @@ Write a step-by-step guide on how to set up a CI/CD pipeline using GitLab
 - A DB replica for production DB should be there, if the company budget allows.
 
 - Frequent regular DB backup and retrieval systems should be there, to recover any accidental situation.
+
+- Use Secrets management tools like `HashiCorp Vault` or `Infisical`
 
 **Network Security:**
 
@@ -202,5 +205,43 @@ Steps -
 
 ##
 # Real-World Scenarios
-
 ## 2.1 Scaling and Performance:
+**Scenario:** 
+Your web application hosted on AWS is experiencing high traffic, leading to increased response times and occasional failures. Describe your approach to scale the infrastructure to handle traffic smoothly and ensure high availability.
+
+**Solution Approach:**
+First of all we will try to identify the problem, since we already know it's High Traffic, means the cache volume increases, the memory of the server also is not being sufficient. 
+Now our approach will be to add more servers and add a load balancer to ditribute the traffic. In case the cloud provider is AWS, we can add clouwatch alarms to monitor CPU and Memory consumption of the servers and bind to AutoScaling Group to adjust Target Instances (adding or reducing number of servers) depending on need. 
+We will allocate more resources first then based on metrics available we will reduce the resources little by little, that's safer since we don't know the traffic beforehand (the server crashed previously so we don't know exact number of traffic).
+
+Another way could be adding predictable scaling where if we know a massive number of users are gonna hit ours system (like Daraz 11.11 offers) our system can automatically increase number of servers/instances at a given time. 
+
+To ensure HA (High Availability) the Single Point of Failure has to be removed and we have to use multiple Availability Zones. 
+
+And obviously we will keep on monitoring the health and performance of the system to further optmize it more, set alerts if there is any issues so that our team get's notified before the user even notices any lags.
+
+This approach will help us stay safe in case of high traffic incidents.
+
+> Additonally, it's not only the infra, but also the application that might be the issue. We can sit with the development and QA team to discuss about their views and findings, the container size, the DB query times, caching all have to be optimized.
+
+
+## 2.2 Cost Management:
+**Scenario:** 
+As a DevOps engineer, you are tasked with reducing the monthly cloud expenditure of your company by 20% without compromising performance. What strategies and tools would you employ to achieve this?
+
+**Solution Approach:**
+First of all we can look for data, if there is monitoring not enabled, we will enable monitoring. 
+- We can look into the CPU and Memory consumptions, if possible we will reduce the size of the servers/instances
+- Using AWS Cost explorer we can find which resource is costing us more. If not we can also see the bills.
+- Using autoscaling we can even reduce number of running instances to 1 when there is no user using our app.
+- Cloud providers have discounts if we commit, like using aws spot instances can reduce cost significantly.
+- Additionally we can move unaccessed data to s3 IA or Glacier if not accessed at all for a long period of time, such as DB backup dumps.
+- If there is a static website or for any reason if a CDN is used, we can optimize the size of the files, and even edit metadata of the files to increase the invalidation time.
+- Furthermore, we can constantly monitor our resources and set alerts if it increases our budget.
+- We can implement firewall to declie DOS attacks which potentially increases cost due to traffic
+
+> We can also with the development team, to find out rooms of improvements. In my experience, I once found a single application imported a large library for only a single function, such cases eventually makes the application bulky and increases cost further. 
+
+DevOps means collaboration, together, all team working side by side we can hope to optmize our application while keeping it Highly Available and Highly Scalable. 
+
+> Ashraf Minhaj was here.
