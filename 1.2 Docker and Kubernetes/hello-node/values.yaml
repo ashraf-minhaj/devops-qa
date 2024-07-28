@@ -1,0 +1,18 @@
+replicaCount: 2
+
+image:
+  repository: ashraftheminhaj/hello-node
+  tag: v2
+  pullPolicy: IfNotPresent
+
+service:
+  name: hello-node-service
+  type: NodePort
+  port: 3000
+  targetPort: 3000
+  nodePort: 32123 
+
+deployment:
+  name: hello-node
+
+resources: {}

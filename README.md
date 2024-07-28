@@ -179,8 +179,26 @@ And finally to destroy the whole infra -
 - `destroy.sh dev`
 
 ## 1.2 Docker and Kubernetes:
-[files](1.2%20Docker%20and%20Kubernetes/)
+The files can be found [here](1.2%20Docker%20and%20Kubernetes/)
 
+Steps -
+0. created the image from the dockerfile and pushed to a registry
+1. created the `deployment.yaml` file that contains image informations, replica counts etc.
+2. Additonally added a `service.yaml` file that exposes the pods running our application. Although this was not a requirement for the interview-test, it was added to test my codes work as they should be.
+3. Added helm chart information, passed variables from the `values.yaml` file. 
+
+**Deploy** -
+1. create a namespace, don't use default namespaces.
+2. to deploy the applicaton run being inside the [project directory](1.2%20Docker%20and%20Kubernetes/) -
+   ```bash
+   helm package hello-node
+   helm install hello-node ./hello-node
+   ```
+**To update** -
+1. edit files
+2. apply the changes `helm upgrade hello-node ./hello-node`
+
+> Note, this approach has it's own downside. Since in CI/CD it's not recommended to use push based configuratons, rather pull based deployment configurations using tools like ArgoCD that will monitor your repo and will deploy apps if change is found. That way you won't have to store your `kubeconfig` in your repo's secret. 
 
 ##
 # Real-World Scenarios
