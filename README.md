@@ -4,24 +4,24 @@
 
 - [Change Control](#changecontrol2)
 - [Theory Questions](#theoryquestions3)
-- [Question 1](#question13)
-- [Question 2](#question25)
-- [Question 3](#question36)
-- [Question 4](#question48)
-- [Question 5](#question58)
-- [Hands On](#handson9)
-  - [1.1 Infrastructure Setup](#11infrastructuresetup9)
-  - [1.2 Docker and Kubernetes:](#12dockerandkubernetes9)
+  - [Question 1](#question1)
+  - [Question 2](#question2)
+  - [Question 3](#question3)
+  - [Question 4](#question4)
+  - [Question 5](#question5)
+- [Hands On](#hands-on)
+  - [1.1 Infrastructure Setup](#11-infrastructure-setup)
+  - [1.2 Docker and Kubernetes:](#12-docker-and-kubernetes)
 - [Real-World Scenarios](#real-world-scenarios)
   - [Scenario 1: scaling-and-performance](#21-scaling-and-performance)
   - [Scenario 2: cost-management](#22-cost-management)
 
 # Change Control
 
-| Date | Comment | Author |
-|---|---|---|
-| 28/07/2024 | First Submission | Ashraf Minhaj |
-||||
+|version| Date | Comment | Author |
+|---|---|---|---|
+|1.0.0| 28/07/2024 | First Submission | Ashraf Minhaj |
+|1.0.1| 28/07/2024| Fixed index| Ashraf Minhaj|
 
 
 # Theory Questions
